@@ -4,11 +4,13 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 io.on('connection', function (client) {
+	// Listen to join event from the client and sets the nickname on success
 	client.on('join', function (nickname) {
 		// Sets the nickname associated to the client
 		client.nickname = nickname;
 		console.log(client.nickname + " is connected.");
 	});
+	// Listen to messages event from the client and broadcast the message on success
 	client.on('messages', function (message) {
 		// Get the nickname of the client before broadcasting message
 		var nickname = client.nickname;

@@ -19,22 +19,27 @@
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
+		// Create a socket with server
 		var server = io.connect('http://localhost:8080');
+		// Listen to connect event from the server and emits the join event back
 		server.on('connect', function(data) {
 			$('#status').html('Connected');
 			nickname = prompt("What is your nickname?");
 			server.emit('join', nickname);
 		});
+		// Listen to messages event from the server
 		server.on('messages', function(data) {
 			insertMessage(data);
 		});
 
+		// On submit form, emits the messages event to the server
 		$('#chat-form').submit(function(e) {
 			e.preventDefault();
 			var message = $('#chat-input').val();
 			server.emit('messages', message);
 		});
 
+		// Just put the message in the chat
 		function insertMessage(data) {
 			$('#message-board').append("<p>" + data + "</p>");
 		}
