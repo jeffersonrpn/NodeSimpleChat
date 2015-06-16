@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NodeSimpleChat</title>
+</head>
+<body>
+	<h1>Chat</h1>
+
+	<div id="message-board"></div>
+
+	<div id="status"></div>
+	
+	<form id="chat-form" action="">
+		<input type="text" id="chat-input" placeholder="Enter your message here...">
+		<input type="submit" value="Enviar">
+	</form>
+	
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		var server = io.connect('http://localhost:8080');
+		server.on('connect', function(data) {
+			$('#status').html('Connected');
+			nickname = prompt("What is your nickname?");
+			server.emit('join', nickname);
+		});
+		server.on('messages', function(data) {
+			insertMessage(data);
+		});
+
+		$('#chat-form').submit(function(e) {
+			e.preventDefault();
+			var message = $('#chat-input').val();
+			server.emit('messages', message);
+		});
+
+		function insertMessage(data) {
+			$('#message-board').append("<p>" + data + "</p>");
+		}
+	</script>
+</body>
+</html>

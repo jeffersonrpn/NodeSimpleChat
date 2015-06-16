@@ -1,0 +1,29 @@
+{
+  "name": "NodeSimpleChat",
+  "version": "0.0.1",
+  "description": "A simple chat room build with Node.js and Socket.io package",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "chatroom",
+    "socket",
+    "node"
+  ],
+  "author": "Jefferson Neves <jefferson.rpn@gmail.com>",
+  "license": "GNU GPL",
+  "dependencies": {
+    "socket.io": "~1.3.5",
+    "express": "~4.12.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffersonrpn/NodeSimpleChat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeffersonrpn/NodeSimpleChat/issues"
+  }
+}
